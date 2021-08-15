@@ -3,16 +3,19 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <Nouns />
     <Verbs />
+    <Adjectives />
   </div>
 </template>
 
 <script>
+import Adjectives from './components/Adjectives.vue'
 import Nouns from './components/Nouns.vue'
 import Verbs from './components/Verbs.vue'
 
 export default {
   name: 'App',
   components: {
+    Adjectives,
     Nouns,
     Verbs
   },
