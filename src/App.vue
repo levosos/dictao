@@ -2,16 +2,19 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <Nouns />
+    <Verbs />
   </div>
 </template>
 
 <script>
 import Nouns from './components/Nouns.vue'
+import Verbs from './components/Verbs.vue'
 
 export default {
   name: 'App',
   components: {
-    Nouns
+    Nouns,
+    Verbs
   },
   created() {
     document.title = 'Dictão'
