@@ -4,12 +4,14 @@
     <Nouns />
     <Verbs />
     <Adjectives />
+    <Adverbs />
     <Conjunctions />
   </div>
 </template>
 
 <script>
 import Adjectives from './components/Adjectives.vue'
+import Adverbs from './components/Adverbs.vue'
 import Conjunctions from './components/Conjunctions.vue'
 import Nouns from './components/Nouns.vue'
 import Verbs from './components/Verbs.vue'
@@ -18,6 +20,7 @@ export default {
   name: 'App',
   components: {
     Adjectives,
+    Adverbs,
     Conjunctions,
     Nouns,
     Verbs
