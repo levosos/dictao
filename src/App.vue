@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Nouns />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Nouns from './components/Nouns.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Nouns
+  },
+  created() {
+    document.title = 'Dictão'
   }
 }
 </script>
