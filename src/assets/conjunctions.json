@@ -1,2 +1,17 @@
 [
+    { "p": "com", "e": "with" },
+    { "p": "como", "e": "as, how to" },
+    { "p": "e", "e": "and" },
+    { "p": "então", "e": "so, then, therfore" },
+    { "p": "embora", "e": "although" },
+    { "p": "ou", "e": "or" },
+    { "p": "onde", "e": "where" },
+    { "p": "mas", "e": "but, yet" },
+    { "p": "nem", "e": "nor" },
+    { "p": "pois", "e": "because" },
+    { "p": "porque", "e": "because" },
+    { "p": "porém", "e": "although, however" },
+    { "p": "que", "e": "that" },
+    { "p": "se", "e": "if" },
+    { "p": "sem", "e": "without" }
 ]
