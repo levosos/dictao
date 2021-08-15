@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Verbs &#8226; Verbos</h2>
     <div v-for="(verb, index) in verbs" v-bind:key="index">
       {{ verb.e }} | {{ verb.p }}
     </div>

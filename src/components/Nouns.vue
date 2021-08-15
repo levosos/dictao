@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Nouns &#8226; Substantivos</h2>
     <div v-for="(noun, index) in nouns" v-bind:key="index">
       {{ noun.e }} | {{ portuguese(noun) }}
     </div>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Conjunctions &#8226; Conjunções</h2>
     <div v-for="(conjunction, index) in conjunctions" v-bind:key="index">
       {{ conjunction.e }} | {{ conjunction.p }}
     </div>
