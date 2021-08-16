@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <h1>Welcome to Dictão</h1>
-    <div><router-link to="/nouns">Nouns</router-link></div>
-    <div><router-link to="/verbs">Verbs</router-link></div>
-    <div><router-link to="/adjectives">Adjectives</router-link></div>
-    <div><router-link to="/adverbs">Adverbs</router-link></div>
-    <div><router-link to="/conjunctions">Conjunctions</router-link></div>
+    <div><router-link to="/nouns">Substantivos</router-link></div>
+    <div><router-link to="/verbs">Verbos</router-link></div>
+    <div><router-link to="/adjectives">Adjetivos</router-link></div>
+    <div><router-link to="/adverbs">Advérbios</router-link></div>
+    <div><router-link to="/conjunctions">Conjunções</router-link></div>
   </div>
 </template>
 
