@@ -1,8 +1,8 @@
 <template>
   <div>
     <hr />
-    <div v-on:click="next()">
-      <p>{{ index + 1 }} / {{ data.length }}</p>
+    <div v-on:click="click()">
+      <p>{{ counter }} / {{ data.length }}</p>
       <h1>{{ english(data[index]) }}</h1>
       <h1 v-if="answer">{{ portuguese(data[index]) }}</h1>
     </div>
@@ -15,7 +15,8 @@ export default {
   name: 'Practice',
   data() {
     return {
-      index: 0,
+      counter: 0,
+      used: [],
       answer: false,
     }
   },
@@ -32,13 +33,28 @@ export default {
   },
   methods: {
     next() {
+      if (this.used.length == this.data.length) {
+        this.used = []
+        this.counter = 1
+      } else {
+        this.counter++
+      }
+
+      do {
+        this.index = Math.floor(Math.random() * this.data.length)
+      } while (this.used.includes(this.index))
+
+      this.used.push(this.index)
+    },
+    click() {
       if (this.answer) {
-        this.index = (this.index + 1) % this.data.length
+        this.next()
       }
 
       this.answer = !this.answer
     }
-  }
+  },
+  created() { this.next() },
 }
 </script>
 
