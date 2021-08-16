@@ -1,15 +1,20 @@
 <template>
   <div>
     <h2>Conjunctions &#8226; Conjunções</h2>
-    <Conjunctions />
+    <List :data="conjunctions" />
   </div>
 </template>
 
 <script>
-import Conjunctions from '../components/Conjunctions.vue'
+import conjunctions from "@/assets/conjunctions.json";
+import List from '../components/List.vue'
+
 export default {
   components: {
-    Conjunctions
-  }
+    List,
+  },
+  data() {
+    return { conjunctions: conjunctions }
+  },
 }
 </script>

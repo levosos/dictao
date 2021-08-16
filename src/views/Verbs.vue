@@ -1,15 +1,20 @@
 <template>
   <div>
     <h2>Verbs &#8226; Verbos</h2>
-    <Verbs />
+    <List :data="verbs" />
   </div>
 </template>
 
 <script>
-import Verbs from '../components/Verbs.vue'
+import verbs from "@/assets/verbs.json";
+import List from '../components/List.vue'
+
 export default {
   components: {
-    Verbs
-  }
+    List,
+  },
+  data() {
+    return { verbs: verbs }
+  },
 }
 </script>

@@ -1,15 +1,20 @@
 <template>
   <div>
     <h2>Adverbs &#8226; Advérbios</h2>
-    <Adverbs />
+    <List :data="adverbs" />
   </div>
 </template>
 
 <script>
-import Adverbs from '../components/Adverbs.vue'
+import adverbs from "@/assets/adverbs.json";
+import List from '../components/List.vue'
+
 export default {
   components: {
-    Adverbs
-  }
+    List,
+  },
+  data() {
+    return { adverbs: adverbs }
+  },
 }
 </script>
