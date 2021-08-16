@@ -18,7 +18,7 @@
     { "g": "f", "p": "filha", "e": "daughter" },
     { "g": "m", "p": "filho", "e": "son" },
     { "g": "m", "p": "frango", "e": "chicken" },
-    { "g": "m", "p": "homen", "e": "man" },
+    { "g": "m", "p": "homem", "e": "man" },
     { "g": "f", "p": "hora", "e": "hour" },
     { "g": "m", "p": "livro", "e": "book" },
     { "g": "f", "p": "mãe", "e": "mother" },
@@ -28,5 +28,7 @@
     { "g": "m", "p": "minuto", "e": "minute" },
     { "g": "f", "p": "mulher", "e": "woman" },
     { "g": "m", "p": "pai", "e": "father" },
-    { "g": "f", "p": "semana", "e": "week" }
+    { "g": "m", "p": "pão", "e": "bread" },
+    { "g": "f", "p": "semana", "e": "week" },
+    { "g": "f", "p": "vez", "e": "turn, time" }
 ]
