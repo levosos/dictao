@@ -1,17 +1,21 @@
 <template>
   <div>
     <div class="word" v-for="(obj, index) in data" :key="index">
-      <span class="portuguese">{{ portuguese(obj) }}</span>
-      <span class="pronunciation" v-if="pronunciation(obj)">{{pronunciation(obj)}}</span>
-      <span class="english">{{ english(obj) }}</span>
+      <Word class="portuguese" :word="portuguese(obj)" :pronunciation="pronunciation(obj)" />
+      <Word class="english" :word="english(obj)" />
     </div>
     <p>Total {{ data.length }}</p>
   </div>
 </template>
 
 <script>
+import Word from './Word.vue'
+
 export default {
   name: 'List',
+  components: {
+    Word,
+  },
   props: {
     'data': Array,
     'english': {
@@ -31,20 +35,11 @@ export default {
 </script>
 
 <style scoped>
-.word :not(.pronunciation) {
-  font-size: 130%;
-}
-
-span {
-  margin-left: 5px;
-  margin-right: 5px;
+.word {
+  font-size: larger;
 }
 
 .portuguese {
   background-color: #42b983;
-}
-
-.pronunciation {
-  opacity: 0.6;
 }
 </style>
