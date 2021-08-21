@@ -1,23 +1,17 @@
 <template>
-  <div>
-    <h2>Conjunctions &#8226; Conjunções</h2>
-    <Practice :data="conjunctions" />
-    <List :data="conjunctions" />
-  </div>
+  <Page en="Conjunctions" pt="Conjunções" v-bind="$data" />
 </template>
 
 <script>
+import Page from '../components/Page.vue'
 import conjunctions from "@/assets/conjunctions.json";
-import List from '../components/List.vue'
-import Practice from '../components/Practice.vue'
 
 export default {
   components: {
-    List,
-    Practice,
+    Page,
   },
   data() {
-    return { conjunctions: conjunctions }
+    return { data: conjunctions }
   },
 }
 </script>

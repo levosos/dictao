@@ -1,36 +1,30 @@
 <template>
-  <div>
-    <h2>Nouns &#8226; Substantivos</h2>
-    <Practice :data="nouns" :portuguese="portuguese" />
-    <List :data="nouns" :portuguese="portuguese" />
-  </div>
+  <Page en="Nouns" pt="Substantivos" v-bind="$data" />
 </template>
 
 <script>
+import Page from '../components/Page.vue'
 import nouns from "@/assets/nouns.json";
-import List from '../components/List.vue'
-import Practice from '../components/Practice.vue'
 
 export default {
   components: {
-    List,
-    Practice,
+    Page,
   },
   data() {
-    return { nouns: nouns }
-  },
-  methods: {
-    portuguese(noun) {
-      function _(p, g) {
-        return p + ' (' + g + ')'
-      }
+    return {
+      data: nouns,
+      portuguese(noun) {
+        function _(p, g) {
+          return p + ' (' + g + ')'
+        }
 
-      if (noun.g == 'b') {
-        return Object.keys(noun.p).map(g => _(noun.p[g], g)).join(' ')
-      } else {
-        return _(noun.p, noun.g)
+        if (noun.g == 'b') {
+          return Object.keys(noun.p).map(g => _(noun.p[g], g)).join(' ')
+        } else {
+          return _(noun.p, noun.g)
+        }
       }
-    },
+    }
   },
 }
 </script>

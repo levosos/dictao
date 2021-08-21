@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button v-on:click="q_qa()">{{ show.answers ? 'q' : 'qa' }}</button>
-    <button v-on:click="en_pt()">{{ lang.a }}</button>
-    <span>{{ counter }} / {{ data.length }}</span>
+    <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
+    <b-button @click="en_pt">{{ lang.q }}</b-button>
+    <span class="button">{{ counter }} / {{ data.length }}</span>
     <div v-on:click="click()">
       <Word v-bind="question" :newline="true" />
       <Word v-if="show.answer" v-bind="answer" />

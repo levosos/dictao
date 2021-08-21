@@ -1,23 +1,17 @@
 <template>
-  <div>
-    <h2>Adverbs &#8226; Advérbios</h2>
-    <Practice :data="adverbs" />
-    <List :data="adverbs" />
-  </div>
+  <Page en="Adverbs" pt="Advérbios" v-bind="$data" />
 </template>
 
 <script>
+import Page from '../components/Page.vue'
 import adverbs from "@/assets/adverbs.json";
-import List from '../components/List.vue'
-import Practice from '../components/Practice.vue'
 
 export default {
   components: {
-    List,
-    Practice,
+    Page,
   },
   data() {
-    return { adverbs: adverbs }
+    return { data: adverbs }
   },
 }
 </script>

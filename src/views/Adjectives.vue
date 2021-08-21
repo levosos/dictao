@@ -1,32 +1,26 @@
 <template>
-  <div>
-    <h2>Adjectives &#8226; Adjetivos</h2>
-    <Practice :data="adjectives" :portuguese="portuguese" />
-    <List :data="adjectives" :portuguese="portuguese" />
-  </div>
+  <Page en="Adjectives" pt="Adjetivos" v-bind="$data" />
 </template>
 
 <script>
+import Page from '../components/Page.vue'
 import adjectives from "@/assets/adjectives.json";
-import List from '../components/List.vue'
-import Practice from '../components/Practice.vue'
 
 export default {
   components: {
-    List,
-    Practice,
+    Page,
   },
   data() {
-    return { adjectives: adjectives }
-  },
-  methods: {
-    portuguese(adjective) {
-      if (typeof adjective.p === 'string') {
-        return adjective.p + ' (u)'
-      } else {
-        return Object.keys(adjective.p).map(g => adjective.p[g] + ' (' + g + ')').join(' ')
-      }
-    },
+    return {
+      data: adjectives,
+      portuguese(adjective) {
+        if (typeof adjective.p === 'string') {
+          return adjective.p + ' (u)'
+        } else {
+          return Object.keys(adjective.p).map(g => adjective.p[g] + ' (' + g + ')').join(' ')
+        }
+      },
+    }
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Welcome to Dictão</h1>
+    <h1 class="title">Welcome to Dictão</h1>
     <div><router-link to="/nouns">Substantivos</router-link></div>
     <div><router-link to="/verbs">Verbos</router-link></div>
     <div><router-link to="/adjectives">Adjetivos</router-link></div>
