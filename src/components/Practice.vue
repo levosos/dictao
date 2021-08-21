@@ -1,23 +1,36 @@
 <template>
   <div>
+    <button v-on:click="q_qa()">{{ show.answers ? 'q' : 'qa' }}</button>
+    <button v-on:click="en_pt()">{{ lang.a }}</button>
+    <span>{{ counter }} / {{ data.length }}</span>
     <div v-on:click="click()">
-      <hr />
-      <p>{{ counter }} / {{ data.length }}</p>
-      <h1>{{ english(data[index]) }}</h1>
-      <h1 v-if="answer">{{ portuguese(data[index]) }}<span class="pronunciation" v-if="pronunciation(data[index])">{{ pronunciation(data[index]) }}</span></h1>
-      <hr />
+      <Word v-bind="question" :newline="true" />
+      <Word v-if="show.answer" v-bind="answer" />
     </div>
   </div>
 </template>
 
 <script>
+import Word from './Word.vue'
+
 export default {
   name: 'Practice',
+  components: {
+    Word,
+  },
   data() {
     return {
       counter: 0,
+      index: 0,
       used: [],
-      answer: false,
+      lang: {
+        q: 'en',
+        a: 'pt',
+      },
+      show: {
+        answer: false,
+        answers: true,
+      },
     }
   },
   props: {
@@ -51,27 +64,48 @@ export default {
       this.used.push(this.index)
     },
     click() {
-      if (this.answer) {
+      if (this.show.answers) {
+        if (this.show.answer) {
+          this.next()
+          this.show.answer = false
+        } else {
+          this.show.answer = true
+        }
+      } else {
         this.next()
       }
+    },
+    en_pt() {
+      [this.lang.q, this.lang.a] = [this.lang.a, this.lang.q]
+    },
+    q_qa() {
+      this.show.answers = !this.show.answers
+      this.show.answer = false
+    },
+    props(lang) {
+      const word = this.data[this.index];
 
-      this.answer = !this.answer
-    }
+      if (lang == 'en') {
+        return { word: this.english(word) }
+      } else if (lang == 'pt') {
+        return { word: this.portuguese(word), pronunciation: this.pronunciation(word) }
+      }
+    },
   },
   created() { this.next() },
+  computed: {
+    question() {
+      return this.props(this.lang.q)
+    },
+    answer() {
+      return this.props(this.lang.a)
+    },
+  },
 }
 </script>
 
 <style scoped>
-hr {
-  margin-right: 40px;
-  margin-left: 40px;
-}
-
-.pronunciation {
-  font-size: 70%;
-  font-weight: lighter;
-  opacity: 0.5;
-  margin-left: 10px;
+.word {
+  font-size: xx-large;
 }
 </style>
