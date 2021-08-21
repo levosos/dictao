@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
-    <b-button @click="en_pt">{{ lang.q }}</b-button>
-    <span class="button">{{ counter }} / {{ data.length }}</span>
-    <div v-on:click="click()">
+  <section>
+    <section class="controls">
+      <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
+      <b-button @click="en_pt">{{ lang.q }}</b-button>
+      <span class="button">{{ counter }} / {{ data.length }}</span>
+    </section>
+    <section v-on:click="click()">
       <Word v-bind="question" :newline="true" />
-      <Word v-if="show.answer" v-bind="answer" />
-    </div>
-  </div>
+      <Word class="answer" v-if="show.answer" v-bind="answer" />
+    </section>
+  </section>
 </template>
 
 <script>
@@ -107,5 +109,13 @@ export default {
 <style scoped>
 .word {
   font-size: xx-large;
+}
+
+.answer {
+  background-color: #42b983;
+}
+
+.controls {
+  margin-bottom: 16px;
 }
 </style>
