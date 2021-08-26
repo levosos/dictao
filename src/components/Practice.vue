@@ -4,9 +4,9 @@
       <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
       <b-button @click="en_pt">{{ lang.q }}</b-button>
       <b-button @click="star"><b-icon :icon="star_icon" /></b-button>
-      <span class="button">{{ counter }} / {{ data.length }}</span>
+      <span class="button">{{ index + 1 }} / {{ data.length }}</span>
     </section>
-    <section v-on:click="click()">
+    <section v-on:click="click">
       <Word v-bind="question" :newline="true" />
       <Word class="answer" v-if="show.answer" v-bind="answer" />
     </section>
@@ -26,9 +26,7 @@ export default {
   },
   data() {
     return {
-      counter: 0,
       index: 0,
-      used: [],
       lang: {
         q: 'en',
         a: 'pt',
@@ -56,30 +54,50 @@ export default {
     },
   },
   methods: {
+    shuffle() {
+      // based on https://stackoverflow.com/a/12646864/9540328
+      for (let i = this.data.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.data[i], this.data[j]] = [this.data[j], this.data[i]];
+      }
+    },
     next() {
-      if (this.used.length == this.data.length) {
-        this.used = []
-        this.counter = 1
-      } else {
-        this.counter++
+      if (++this.index == this.data.length) {
+        this.index = 0
+        this.shuffle()
+      }
+    },
+    previous() {
+      if (this.index > 0) {
+        this.index--
+      }
+    },
+    click(event) {
+      // the following should work but we protect from non existing event
+      // properties just in case;
+      // we currently do this manually but should consider using lodash instead.
+      let x, width = undefined
+      x = event.offsetX
+      if (event.target) {
+        width = event.target.offsetWidth
       }
 
-      do {
-        this.index = Math.floor(Math.random() * this.data.length)
-      } while (this.used.includes(this.index))
-
-      this.used.push(this.index)
-    },
-    click() {
-      if (this.show.answers) {
-        if (this.show.answer) {
-          this.next()
-          this.show.answer = false
+      // go next if pressed on the rightmost 80% of the screen
+      // or if could not tell where; otherwise go previous.
+      if (!x || !width || x > width * 0.2) {
+        if (this.show.answers) {
+          if (this.show.answer) {
+            this.next()
+            this.show.answer = false
+          } else {
+            this.show.answer = true
+          }
         } else {
-          this.show.answer = true
+          this.next()
         }
       } else {
-        this.next()
+        this.previous()
+        this.show.answer = false
       }
     },
     en_pt() {
@@ -105,7 +123,7 @@ export default {
       }
     },
   },
-  created() { this.next() },
+  created() { this.shuffle() },
   computed: {
     question() {
       return this.props(this.lang.q)
