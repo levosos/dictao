@@ -3,22 +3,26 @@
     <section class="controls">
       <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
       <b-button @click="en_pt">{{ lang.q }}</b-button>
+      <b-button @click="star"><b-icon :icon="star_icon" /></b-button>
       <span class="button">{{ counter }} / {{ data.length }}</span>
     </section>
     <section v-on:click="click()">
       <Word v-bind="question" :newline="true" />
       <Word class="answer" v-if="show.answer" v-bind="answer" />
     </section>
+    <List v-if="starred.length" :total="false" v-bind="{ ...$props, data: this.starred }" />
   </section>
 </template>
 
 <script>
 import Word from './Word.vue'
+import List from './List.vue'
 
 export default {
   name: 'Practice',
   components: {
     Word,
+    List,
   },
   data() {
     return {
@@ -33,6 +37,7 @@ export default {
         answer: false,
         answers: true,
       },
+      starred: [],
     }
   },
   props: {
@@ -84,13 +89,19 @@ export default {
       this.show.answers = !this.show.answers
       this.show.answer = false
     },
+    star() {
+      const index = this.starred.indexOf(this.word);
+      if (index === -1) {
+        this.starred.push(this.word);
+      } else {
+        this.starred.splice(index, 1);
+      }
+    },
     props(lang) {
-      const word = this.data[this.index];
-
       if (lang == 'en') {
-        return { word: this.english(word) }
+        return { word: this.english(this.word) }
       } else if (lang == 'pt') {
-        return { word: this.portuguese(word), pronunciation: this.pronunciation(word) }
+        return { word: this.portuguese(this.word), pronunciation: this.pronunciation(this.word) }
       }
     },
   },
@@ -102,6 +113,12 @@ export default {
     answer() {
       return this.props(this.lang.a)
     },
+    word() {
+      return this.data[this.index]
+    },
+    star_icon() {
+      return this.starred.indexOf(this.word) === -1 ? 'star-outline' : 'star'
+    }
   },
 }
 </script>
