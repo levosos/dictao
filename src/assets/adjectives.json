@@ -1,4 +1,5 @@
 [
+    { "e": "away, far", "p": "longe" },
     { "e": "beautiful", "p": { "m": "bonito", "f": "bonita" }, "pronunciation": "boo-nee-too" },
     { "e": "big", "p": "grande", "pronunciation": "gran-deh" },
     { "e": "brown", "p": { "m": "castanho", "f": "castanha" } },
@@ -12,6 +13,7 @@
     { "e": "delicious", "p": { "m": "delicioso", "f": "deliciosa" } },
     { "e": "direct", "p": { "m": "directo", "f": "directa" }, "pronunciation": "dee-reh-too" },
     { "e": "easy", "p": "fácil" },
+    { "e": "entire", "p": { "m": "inteiro", "f": "inteira" } },
     { "e": "expensive", "p": { "m": "caro", "f": "cara" }, "pronunciation": "kah-roo" },
     { "e": "fast", "p": { "m": "rápido", "f": "rápida" } },
     { "e": "first", "p": { "m": "primeiro", "f": "primeira" }, "pronunciation": "pree-mahee-roh" },
@@ -26,8 +28,10 @@
     { "e": "long", "p": { "m": "longo", "f": "longa" }, "pronunciation": "lon-gah" },
     { "e": "long (in length)", "p": { "m": "comprido", "f": "comprida" }, "pronunciation": "coom-pree-doo" },
     { "e": "low", "p": { "m": "baixo", "f": "baixa" } },
+    { "e": "mandatory", "p": { "m": "obrigatório", "f": "obrigatória" } },
     { "e": "married", "p": { "m": "casado", "f": "casada" }, "pronunciation": "kah-zah-doo" },
     { "e": "maximum", "p": { "m": "máximo", "f": "máxima" }, "pronunciation": "mah-see-moo" },
+    { "e": "near, close", "p": "perto" },
     { "e": "new", "p": { "m": "novo", "f": "nova" }, "pronunciation": "noh-voo" },
     { "e": "next, following", "p": { "m": "próximo", "f": "próxima" }, "pronunciation": "pro-see-moo" },
     { "e": "old", "p": { "m": "velho", "f": "velha" }, "pronunciation": "vay-lyioo" },
@@ -49,6 +53,7 @@
     { "e": "tired", "p": { "m": "cansado", "f": "cansada" } },
     { "e": "ugly", "p": { "m": "feio", "f": "feia" }, "pronunciation": "fay-eeoo" },
     { "e": "weak", "p": { "m": "fraco", "f": "fraca" } },
+    { "e": "wild", "p": "selvajem" },
     { "e": "yello", "p": { "m": "amarelo", "f": "amarela" } },
     { "e": "young", "p": "jovem" }
 ]
