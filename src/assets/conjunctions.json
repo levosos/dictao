@@ -1,10 +1,11 @@
 [
     { "p": "a", "e": "to", "tags": ["preposition"] },
-    { "p": "às", "e": "at" },
+    { "p": "às", "e": "at", "tags": ["preposition"] },
     { "p": "até", "e": "up to, until", "pronunciation": "ah-tay" },
     { "p": "com", "e": "with", "pronunciation": "con" },
     { "p": "como", "e": "as, how to", "pronunciation": "komo" },
     { "p": "de", "e": "of, by, from", "tags": ["preposition"] },
+    { "p": "durante", "e": "during", "tags": ["preposition"] },
     { "p": "e", "e": "and", "pronunciation": "ee" },
     { "p": "então", "e": "so, then, therfore", "pronunciation": "eing-taung" },
     { "p": "em", "e": "in, on, at", "tags": ["preposition"] },
