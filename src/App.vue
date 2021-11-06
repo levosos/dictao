@@ -2,11 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/nouns">Substantivos</router-link> |
-      <router-link to="/verbs">Verbos</router-link> |
-      <router-link to="/adjectives">Adjetivos</router-link> |
-      <router-link to="/adverbs">Advérbios</router-link> |
-      <router-link to="/conjunctions">Conjunções</router-link>
+      <router-link to="/random">Random</router-link>
     </div>
     <router-view/>
   </div>

@@ -7,6 +7,8 @@ import Conjunctions from '../views/Conjunctions.vue'
 import Nouns from '../views/Nouns.vue'
 import Verbs from '../views/Verbs.vue'
 
+import _ from 'lodash'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +16,20 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/random',
+    redirect: () => {
+      const options = [
+        '/adjectives',
+        '/adverbs',
+        '/conjunctions',
+        '/nouns',
+        '/verbs',
+      ]
+
+      return _.sample(options)
+    }
   },
   {
     path: '/adjectives',
