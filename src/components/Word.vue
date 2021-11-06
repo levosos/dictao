@@ -1,5 +1,5 @@
 <template>
-  <span class="word">
+  <span class="word" v-if="word">
     {{ word }}
     <span class="pronunciation" v-if="pronounced && pronunciation"> {{ pronunciation }}</span>
     <br v-if="newline" />

@@ -4,7 +4,16 @@
       <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
       <b-button @click="en_pt">{{ lang.q }}</b-button>
       <b-button @click="star"><b-icon :icon="star_icon" /></b-button>
-      <span class="button">{{ index + 1 }} / {{ data.length }}</span>
+      <b-button @click="filter"><b-icon :icon="filter_icon" /></b-button>
+      <span class="button">{{ filtered_data.length ? index + 1 : 0 }} / {{ filtered_data.length }}</span>
+    </section>
+    <section id="filter" v-if="filtering">
+      <b-checkbox-button @input="restart" v-for="letter in 'abcdefghijklmnopqrstuvwxyz'" :key="letter" v-model="filters" :native-value="letter" type="is-success">
+        {{ letter }}
+      </b-checkbox-button>
+      <b-button @click="clear_filters" :disabled="filters.length === 0">
+        <b>clear</b>
+      </b-button>
     </section>
     <section v-on:click="click">
       <Word v-bind="question" :newline="true" />
@@ -18,6 +27,8 @@
 import Word from './Word.vue'
 import List from './List.vue'
 
+import _ from 'lodash';
+
 export default {
   name: 'Practice',
   components: {
@@ -26,6 +37,7 @@ export default {
   },
   data() {
     return {
+      shuffled_data: [],
       index: 0,
       lang: {
         q: 'en',
@@ -36,6 +48,8 @@ export default {
         answers: true,
       },
       starred: [],
+      filtering: false,
+      filters: []
     }
   },
   props: {
@@ -54,17 +68,25 @@ export default {
     },
   },
   methods: {
+    filter() {
+      this.filtering = !this.filtering
+    },
     shuffle() {
-      // based on https://stackoverflow.com/a/12646864/9540328
-      for (let i = this.data.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [this.data[i], this.data[j]] = [this.data[j], this.data[i]];
-      }
+      this.shuffled_data = _.shuffle(this.data)
+    },
+    restart() {
+      // reshuffle (all) the data
+      this.shuffle()
+
+      // start from the beginning (of the filtered data)
+      this.index = 0
+
+      // hide the answer if it is shown
+      this.show.answer = false
     },
     next() {
-      if (++this.index == this.data.length) {
-        this.index = 0
-        this.shuffle()
+      if (++this.index == this.filtered_data.length) {
+        this.restart()
       }
     },
     previous() {
@@ -101,22 +123,36 @@ export default {
       }
     },
     en_pt() {
+      // switch between question and answer languages
       [this.lang.q, this.lang.a] = [this.lang.a, this.lang.q]
+
+      // we have to restart when filtering as data changes due to
+      // the change of language.
+      // therefore, we restart in all cases for consistency.
+      this.restart()
     },
     q_qa() {
       this.show.answers = !this.show.answers
       this.show.answer = false
     },
     star() {
-      const index = this.starred.indexOf(this.word);
-      if (index === -1) {
-        this.starred.push(this.word);
-      } else {
-        this.starred.splice(index, 1);
+      if (this.word !== undefined) {
+        const index = this.starred.indexOf(this.word);
+        if (index === -1) {
+          this.starred.push(this.word);
+        } else {
+          this.starred.splice(index, 1);
+        }
       }
     },
+    clear_filters() {
+      this.filters = []
+      this.restart()
+    },
     props(lang) {
-      if (lang == 'en') {
+      if (this.word === undefined) {
+        return { word: undefined }
+      } else if (lang == 'en') {
         return { word: this.english(this.word) }
       } else if (lang == 'pt') {
         return { word: this.portuguese(this.word), pronunciation: this.pronunciation(this.word) }
@@ -132,16 +168,66 @@ export default {
       return this.props(this.lang.a)
     },
     word() {
-      return this.data[this.index]
+      return this.filtered_data[this.index]
     },
     star_icon() {
       return this.starred.indexOf(this.word) === -1 ? 'star-outline' : 'star'
+    },
+    filter_icon() {
+      return this.filters.length ? 'filter' : 'filter-outline'
+    },
+    filtered_data() {
+      const filter = function(word) {
+        const translate = {
+          // https://en.wikipedia.org/wiki/Portuguese_orthography#Diacritics
+          'á': 'a',
+          'â': 'a',
+          'ã': 'a',
+          'à': 'a',
+          'ç': 'c',
+          'é': 'e',
+          'ê': 'e',
+          'è': 'e',
+          'í': 'i',
+          'ì': 'i',
+          'ó': 'o',
+          'ô': 'o',
+          'õ': 'o',
+          'ò': 'o',
+          'ú': 'u',
+          'ù': 'u',
+        };
+
+        // extract the word depending on the language
+        word = this.lang.q == 'en' ? this.english(word) : this.portuguese(word)
+
+        // take the first character
+        let letter = word.charAt(0).toLowerCase()
+
+        // ignore accents
+        letter = translate[letter] || letter
+
+        // see if it is filtered
+        return this.filters.indexOf(letter) !== -1
+      }.bind(this)
+
+      if (this.filters.length) {
+        return this.shuffled_data.filter(filter)
+      } else {
+        return this.shuffled_data
+      }
     }
   },
 }
 </script>
 
 <style scoped>
+#filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+}
+
 .word {
   font-size: xx-large;
 }
