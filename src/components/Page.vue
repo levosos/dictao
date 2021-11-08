@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import List from '../components/List.vue'
-import Practice from '../components/Practice.vue'
+import List from './List.vue'
+import Practice from './Practice.vue'
 
 export default {
   components: {

@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// views
 import Home from '../views/Home.vue'
-import Adjectives from '../views/Adjectives.vue'
-import Adverbs from '../views/Adverbs.vue'
-import Conjunctions from '../views/Conjunctions.vue'
-import Nouns from '../views/Nouns.vue'
-import Verbs from '../views/Verbs.vue'
+
+// components
+import Page from '../components/Page.vue'
+
+// collections
+import adjectives from '../collections/adjectives'
+import adverbs from '../collections/adverbs'
+import conjunctions from '../collections/conjunctions'
+import nouns from '../collections/nouns'
+import verbs from '../collections/verbs'
 
 import _ from 'lodash'
 
@@ -14,7 +21,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home
   },
   {
@@ -33,28 +39,48 @@ const routes = [
   },
   {
     path: '/adjectives',
-    name: 'Adjectives',
-    component: Adjectives
+    component: Page,
+    props: {
+      en: 'Adjectives',
+      pt: 'Adjetivos',
+      data: adjectives,
+    }
   },
   {
     path: '/adverbs',
-    name: 'Adverbs',
-    component: Adverbs
+    component: Page,
+    props: {
+      en: 'Adverbs',
+      pt: 'Advérbios',
+      data: adverbs,
+    }
   },
   {
     path: '/conjunctions',
-    name: 'Conjunctions',
-    component: Conjunctions
+    component: Page,
+    props: {
+      en: 'Conjunctions',
+      pt: 'Conjunções',
+      data: conjunctions,
+    },
   },
   {
     path: '/nouns',
-    name: 'Nouns',
-    component: Nouns
+    component: Page,
+    props: {
+      en: 'Nouns',
+      pt: 'Substantivos',
+      data: nouns,
+    }
   },
   {
     path: '/verbs',
-    name: 'Verbs',
-    component: Verbs
+    component: Page,
+    props: {
+      en: 'Verbs',
+      pt: 'Verbos',
+      data: verbs,
+    }
   }
 ]
 

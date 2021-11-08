@@ -54,18 +54,6 @@ export default {
   },
   props: {
     'data': Array,
-    'english': {
-      type: Function,
-      default: obj => obj.e,
-    },
-    'portuguese': {
-      type: Function,
-      default: obj => obj.p,
-    },
-    'pronunciation': {
-      type: Function,
-      default: obj => obj.pronunciation,
-    },
   },
   methods: {
     filter() {
@@ -153,9 +141,9 @@ export default {
       if (this.word === undefined) {
         return { word: undefined }
       } else if (lang == 'en') {
-        return { word: this.english(this.word) }
+        return { word: this.word.e }
       } else if (lang == 'pt') {
-        return { word: this.portuguese(this.word), pronunciation: this.pronunciation(this.word) }
+        return { word: this.word.p, pronunciation: this.word.pronunciation }
       }
     },
   },
@@ -199,7 +187,7 @@ export default {
         };
 
         // extract the word depending on the language
-        word = this.lang.q == 'en' ? this.english(word) : this.portuguese(word)
+        word = this.lang.q == 'en' ? word.e : word.p
 
         // take the first character
         let letter = word.charAt(0).toLowerCase()
