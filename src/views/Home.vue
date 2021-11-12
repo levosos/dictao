@@ -2,7 +2,7 @@
   <div class="home">
     <h1 class="title">Welcome to Dictão</h1>
     <b-button type="is-success" size="is-large" tag="router-link" to="/browse">Browse</b-button>
-    <b-button type="is-success" size="is-large" tag="router-link" to="/random">Practice</b-button>
+    <b-button type="is-success" size="is-large" tag="router-link" to="/practice">Practice</b-button>
     <p>You can also just go somewhere</p>
     <div><router-link to="/nouns">Substantivos</router-link></div>
     <div><router-link to="/verbs">Verbos</router-link></div>

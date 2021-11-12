@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // views
 import Home from '../views/Home.vue'
 import Browse from '../views/Browse.vue'
+import Practice from '../views/Practice.vue'
 
 // components
 import Page from '../components/Page.vue'
@@ -27,6 +28,10 @@ const routes = [
   {
     path: '/browse',
     component: Browse
+  },
+  {
+    path: '/practice',
+    component: Practice
   },
   {
     path: '/random',
