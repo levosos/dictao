@@ -5,6 +5,8 @@ import Home from '../views/Home.vue'
 import Browse from '../views/Browse.vue'
 import Practice from '../views/Practice.vue'
 
+import data from '../collections/all'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,11 +16,13 @@ const routes = [
   },
   {
     path: '/browse',
-    component: Browse
+    component: Browse,
+    props: data,
   },
   {
     path: '/practice',
-    component: Practice
+    component: Practice,
+    props: data,
   },
 ]
 

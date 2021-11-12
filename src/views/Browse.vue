@@ -1,11 +1,7 @@
 <template>
   <section>
     <h2 class="title">Browse</h2>
-    <b-taglist>
-      <b-tag rounded size="is-medium" v-for="tag in tags" :key="tag" :type="tag_type(tag)" @click.native="tag_clicked(tag)">
-        {{ tag }}
-      </b-tag>
-    </b-taglist>
+    <Tags :tags="tags" :selected="true" @input="selected_tags=$event" />
     <b-input rounded placeholder="Search" type="search" icon="magnify" v-model="filter"></b-input>
     <b>Total {{ filtered_data.length }}</b>
     <section id="list">
@@ -19,49 +15,29 @@
 
 <script>
 import Word from '../components/Word.vue'
-
-import collections from '../collections/all'
+import Tags from '../components/Tags.vue'
 
 export default {
   name: 'Browse',
   components: {
     Word,
+    Tags,
   },
   props: {
     'data': Array,
+    'tags': Array,
   },
   data() {
     return {
       filter: '',
-      tags: [],
       selected_tags: [],
     }
   },
-  created() {
-    // find all available tags
-    this.tags = [...new Set([].concat(...(([].concat(...collections)).map(o => o.tags || []))))]
-
-    // select all of them initially
-    this.selected_tags = [...this.tags]
-  },
-  methods: {
-    tag_type(tag) {
-      return this.selected_tags.indexOf(tag) === -1 ? 'is-success is-light' : 'is-success'
-    },
-    tag_clicked(tag) {
-      const index = this.selected_tags.indexOf(tag)
-      if (index === -1) {
-        this.selected_tags.push(tag)
-      } else {
-        this.selected_tags.splice(index, 1)
-      }
-    },
-  },
   computed: {
     filtered_data() {
-      const filter_lowercase = this.filter.toLowerCase()
+      const filter_text = function(o) {
+        const filter_lowercase = this.filter.toLowerCase()
 
-      const filter = function(o) {
         const english = o.e.toLowerCase()
         if (english.indexOf(filter_lowercase) !== -1) {
           return true
@@ -95,22 +71,17 @@ export default {
         return false
       }.bind(this)
 
-      let result = []
+      const filter_tags = function(o) {
+        return this.selected_tags.some(tag => o.tags.indexOf(tag) !== -1)
+      }.bind(this)
 
-      for (const collection of collections) {
-        result.push(...collection.filter(filter))
-      }
-
-      return result.filter(o => this.selected_tags.some(tag => o.tags.indexOf(tag) !== -1))
+      return this.data.filter(filter_tags).filter(filter_text)
     },
   }
 }
 </script>
 
 <style scoped>
-.tags {
-  justify-content: center;
-}
 #list {
   margin-top: 1rem;
   margin-left: 5vw;

@@ -9,11 +9,7 @@
       <span class="button">{{ filtered_data.length ? index + 1 : 0 }} / {{ filtered_data.length }}</span>
     </section>
     <section id="filter" v-if="filtering">
-      <b-taglist>
-        <b-tag rounded size="is-medium" v-for="tag in tags" :key="tag" :type="tag_type(tag)" @click.native="tag_clicked(tag)">
-          {{ tag }}
-        </b-tag>
-      </b-taglist>
+      <Tags :tags="tags" :selected="selected_tags" @input="tags_changed" />
       <b-checkbox-button @input="restart" v-for="letter in 'abcdefghijklmnopqrstuvwxyz'" :key="letter" v-model="filters" :native-value="letter" type="is-success">
         {{ letter }}
       </b-checkbox-button>
@@ -32,8 +28,7 @@
 <script>
 import Word from '../components/Word.vue'
 import List from '../components/List.vue'
-
-import collections from '../collections/all'
+import Tags from '../components/Tags.vue'
 
 import _ from 'lodash';
 
@@ -42,6 +37,7 @@ export default {
   components: {
     Word,
     List,
+    Tags,
   },
   data() {
     return {
@@ -58,19 +54,19 @@ export default {
       starred: [],
       filtering: false,
       filters: [],
-      tags: [],
       selected_tags: [],
     }
   },
   props: {
     'data': Array,
+    'tags': Array,
   },
   methods: {
     filter() {
       this.filtering = !this.filtering
     },
     shuffle() {
-      this.shuffled_data = _.shuffle([].concat(...collections))
+      this.shuffled_data = _.shuffle(this.data)
     },
     restart() {
       // reshuffle (all) the data
@@ -156,28 +152,12 @@ export default {
         return { word: this.word.p, pronunciation: this.word.pronunciation }
       }
     },
-    tag_type(tag) {
-      return this.selected_tags.indexOf(tag) === -1 ? 'is-success is-light' : 'is-success'
-    },
-    tag_clicked(tag) {
-      const index = this.selected_tags.indexOf(tag)
-      if (index === -1) {
-        this.selected_tags.push(tag)
-      } else {
-        this.selected_tags.splice(index, 1)
-      }
-
+    tags_changed(tags) {
+      this.selected_tags = tags
       this.restart()
     },
   },
   created() {
-    // find all available tags
-    this.tags = [...new Set([].concat(...(([].concat(...collections)).map(o => o.tags || []))))]
-
-    // select all of them initially
-    this.selected_tags = [...this.tags]
-
-    // and shuffle the data
     this.shuffle()
   },
   computed: {
@@ -194,10 +174,10 @@ export default {
       return this.starred.indexOf(this.word) === -1 ? 'star-outline' : 'star'
     },
     filter_icon() {
-      return this.filters.length || this.selected_tags.length !== this.tags.length ? 'filter' : 'filter-outline'
+      return this.filters.length || this.selected_tags.length ? 'filter' : 'filter-outline'
     },
     filtered_data() {
-      const filter = function(word) {
+      const filter_text = function(word) {
         const translate = {
           // https://en.wikipedia.org/wiki/Portuguese_orthography#Diacritics
           'á': 'a',
@@ -231,23 +211,27 @@ export default {
         return this.filters.indexOf(letter) !== -1
       }.bind(this)
 
+      const filter_tags = function(o) {
+        return this.selected_tags.some(tag => o.tags.indexOf(tag) !== -1)
+      }.bind(this)
+
       let result = this.shuffled_data
 
       if (this.filters.length) {
-        result = result.filter(filter)
+        result = result.filter(filter_text)
       }
 
-      return result.filter(o => this.selected_tags.some(tag => o.tags.indexOf(tag) !== -1))
+      if (this.selected_tags.length) {
+        result = result.filter(filter_tags)
+      }
+
+      return result
     }
   },
 }
 </script>
 
 <style scoped>
-.tags {
-  justify-content: center;
-}
-
 #filter {
   display: flex;
   flex-wrap: wrap;
