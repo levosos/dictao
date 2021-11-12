@@ -12,4 +12,4 @@ function portuguese(o) {
   }
 }
 
-export default data.map(o => { return { ...o, p: portuguese(o) } })
+export default data.map(o => { return { ...o, p: portuguese(o), tags: (o.tags || []).concat(['nouns']) } })
