@@ -34,7 +34,7 @@ export default {
   computed: {
     filtered_data() {
       const filter_text = function(o) {
-        const filter_lowercase = this.filter.toLowerCase()
+        const filter_lowercase = this.filter.toLowerCase().trim()
 
         const english = o.e.toLowerCase()
         if (english.indexOf(filter_lowercase) !== -1) {
