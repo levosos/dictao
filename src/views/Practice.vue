@@ -22,7 +22,7 @@
       <Word class="answer" v-if="show.answer" v-bind="answer" />
     </section>
     <span style="flex: 1" />
-    <List v-if="starred.length" :total="false" v-bind="{ ...$props, data: this.starred }" />
+    <List v-if="starred.length" :removable="true" v-bind="{ ...$props, data: this.starred }" />
   </section>
 </template>
 
@@ -134,7 +134,7 @@ export default {
       if (this.word !== undefined) {
         const index = this.starred.indexOf(this.word);
         if (index === -1) {
-          this.starred.push(this.word);
+          this.starred.unshift(this.word);
         } else {
           this.starred.splice(index, 1);
         }

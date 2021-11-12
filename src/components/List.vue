@@ -1,14 +1,12 @@
 <template>
-  <section>
-    <p v-if="total">Total {{ data.length }}</p>
-    <b-table :data="data" :mobile-cards="false" :striped="true" :narrowed="true">
-      <b-table-column label="Portuguese" :centered="true" width="65%" v-slot="props">
-        <Word :word="props.row.p" :pronunciation="props.row.pronunciation" />
-      </b-table-column>
-      <b-table-column label="English" :centered="true" width="35%" v-slot="props">
-        <Word :word="props.row.e" />
-      </b-table-column>
-    </b-table>
+  <section class="list">
+    <div class="row" v-for="word in data" :key="word.e + word.p">
+      <b-button v-if="removable" type="is-text" icon-left="delete" @click="remove(word)" />
+      <div class="text">
+        <Word class="english" :word="word.e"/>
+        <Word class="portuguese" :word="word.p" :pronunciation="word.pronunciation"/>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -22,16 +20,41 @@ export default {
   },
   props: {
     'data': Array,
-    'total': {
+    'removable': {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
+  methods: {
+    remove(word) {
+      const index = this.data.indexOf(word)
+      if (index !== -1) {
+        this.data.splice(index, 1)
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
-.word {
-  font-size: larger;
+.list {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+.row {
+  display: flex;
+}
+.row .english {
+  text-align: left;
+}
+.row .portuguese {
+  text-align: right;
+}
+.text {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  font-size: large;
 }
 </style>

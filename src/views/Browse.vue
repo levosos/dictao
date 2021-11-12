@@ -2,25 +2,20 @@
   <section>
     <h2 class="title">Browse</h2>
     <Tags :tags="tags" :selected="true" @input="selected_tags=$event" />
-    <b-input rounded placeholder="Search" type="search" icon="magnify" v-model="filter"></b-input>
+    <b-input rounded id="search" placeholder="Search" type="search" icon="magnify" v-model="filter" />
     <b>Total {{ filtered_data.length }}</b>
-    <section id="list">
-      <div class="translation" v-for="word in filtered_data" :key="word.e + word.p">
-        <Word :word="word.e"/>
-        <Word :word="word.p" :pronunciation="word.pronunciation"/>
-      </div>
-    </section>
+    <List id="list" :data="filtered_data" :removable="false" />
   </section>
 </template>
 
 <script>
-import Word from '../components/Word.vue'
+import List from '../components/List.vue'
 import Tags from '../components/Tags.vue'
 
 export default {
   name: 'Browse',
   components: {
-    Word,
+    List,
     Tags,
   },
   props: {
@@ -84,11 +79,5 @@ export default {
 <style scoped>
 #list {
   margin-top: 1rem;
-  margin-left: 5vw;
-  margin-right: 5vw;
-}
-.translation {
-  display: flex;
-  justify-content: space-between;
 }
 </style>
