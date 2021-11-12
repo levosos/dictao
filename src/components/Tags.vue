@@ -14,6 +14,10 @@ export default {
     selected: {
       default: false,
     },
+    reset: {
+      type: Boolean,
+      default: true,
+    }
   },
   data() {
     return {
@@ -30,7 +34,10 @@ export default {
       this.selected_tags = this.selected
     }
 
-    this.emit()
+    if (this.reset) {
+      // update the parent component about the selected tags right away
+      this.emit()
+    }
   },
   methods: {
     type(tag) {

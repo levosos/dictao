@@ -9,7 +9,7 @@
       <span class="button">{{ filtered_data.length ? index + 1 : 0 }} / {{ filtered_data.length }}</span>
     </section>
     <section id="filter" v-if="filtering">
-      <Tags :tags="tags" :selected="selected_tags" @input="tags_changed" />
+      <Tags :tags="tags" :selected="selected_tags" :reset="false" @input="tags_changed" />
       <b-checkbox-button @input="restart" v-for="letter in 'abcdefghijklmnopqrstuvwxyz'" :key="letter" v-model="filters" :native-value="letter" type="is-success">
         {{ letter }}
       </b-checkbox-button>
