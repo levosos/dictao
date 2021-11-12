@@ -17,10 +17,11 @@
         <b>clear</b>
       </b-button>
     </section>
-    <section v-on:click="click">
+    <section id="words" v-on:click="click">
       <Word v-bind="question" :newline="true" />
       <Word class="answer" v-if="show.answer" v-bind="answer" />
     </section>
+    <span style="flex: 1" />
     <List v-if="starred.length" :total="false" v-bind="{ ...$props, data: this.starred }" />
   </section>
 </template>
@@ -237,15 +238,15 @@ export default {
   flex-wrap: wrap;
   justify-content: center
 }
-
+#words {
+  min-height: 130px;
+}
 .word {
   font-size: xx-large;
 }
-
 .answer {
   background-color: #42b983;
 }
-
 .controls {
   margin-bottom: 16px;
 }

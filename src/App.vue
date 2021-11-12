@@ -5,7 +5,7 @@
       <router-link to="/browse">Browse</router-link> |
       <router-link to="/practice">Practice</router-link>
     </div>
-    <router-view/>
+    <router-view id="body"/>
   </div>
 </template>
 
@@ -16,7 +16,15 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 40px;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #nav {
