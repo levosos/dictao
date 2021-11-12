@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <h1 class="title">Welcome to Dictão</h1>
-    <b-button id="practice" type="is-success" size="is-large" tag="router-link" to="/random">Practice something</b-button>
+    <b-button type="is-success" size="is-large" tag="router-link" to="/browse">Browse</b-button>
+    <b-button type="is-success" size="is-large" tag="router-link" to="/random">Practice</b-button>
     <p>You can also just go somewhere</p>
     <div><router-link to="/nouns">Substantivos</router-link></div>
     <div><router-link to="/verbs">Verbos</router-link></div>
@@ -19,12 +20,11 @@ export default {
 </script>
 
 <style scoped>
-#practice {
+.button {
   width: 90%;
 
   /* top header has a margin-bottom of 1.5 rem */
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
+  margin: 0.5rem;
 }
 a {
   font-size: 140%;

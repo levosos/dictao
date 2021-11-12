@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // views
 import Home from '../views/Home.vue'
+import Browse from '../views/Browse.vue'
 
 // components
 import Page from '../components/Page.vue'
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/',
     component: Home
+  },
+  {
+    path: '/browse',
+    component: Browse
   },
   {
     path: '/random',
