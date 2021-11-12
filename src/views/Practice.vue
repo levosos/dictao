@@ -159,6 +159,7 @@ export default {
     },
   },
   created() {
+    document.title = "Dictão | Practice";
     this.shuffle()
   },
   computed: {

@@ -28,6 +28,9 @@ export default {
       selected_tags: [],
     }
   },
+  created () {
+    document.title = "Dictão | Browse";
+  },
   computed: {
     filtered_data() {
       const filter_text = function(o) {

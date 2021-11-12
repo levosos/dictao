@@ -10,6 +10,9 @@
 
 export default {
   name: 'Home',
+  created () {
+    document.title = "Dictão";
+  },
 }
 </script>
 
