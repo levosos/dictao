@@ -2,6 +2,7 @@
   <span class="word" v-if="word">
     {{ word }}
     <span class="pronunciation" v-if="pronounced && pronunciation"> {{ pronunciation }}</span>
+    <b-tag rounded size="is-medium" v-for="tag in tags" :key="tag" type="is-light"> {{ tag }} </b-tag>
     <br v-if="newline" />
   </span>
 </template>
@@ -24,6 +25,10 @@ export default {
     'newline': {
       type: Boolean,
       default: false,
+    },
+    'tags': {
+      type: Array,
+      default: null,
     },
   },
 }

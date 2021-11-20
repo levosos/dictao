@@ -5,6 +5,7 @@
       <b-button @click="q_qa">{{ show.answers ? 'Q+A' : 'Q' }}</b-button>
       <b-button @click="en_pt">{{ lang.q }}</b-button>
       <b-button @click="star"><b-icon :icon="star_icon" /></b-button>
+      <b-button @click="help"><b-icon :icon="help_icon" /></b-button>
       <b-button @click="filter"><b-icon :icon="filter_icon" /></b-button>
       <span class="button">{{ filtered_data.length ? index + 1 : 0 }} / {{ filtered_data.length }}</span>
     </section>
@@ -18,7 +19,7 @@
       </b-button>
     </section>
     <section id="words" v-on:click="click">
-      <Word v-bind="question" :newline="true" />
+      <Word v-bind="question" :newline="true" :tags="(show.help && word) ? word.tags : undefined" />
       <Word class="answer" v-if="show.answer" v-bind="answer" />
     </section>
     <span style="flex: 1" />
@@ -51,6 +52,7 @@ export default {
       show: {
         answer: false,
         answers: true,
+        help: true,
       },
       starred: [],
       filtering: false,
@@ -140,6 +142,9 @@ export default {
         }
       }
     },
+    help() {
+      this.show.help = !this.show.help
+    },
     clear_filters() {
       this.filters = []
       this.restart()
@@ -174,6 +179,9 @@ export default {
     },
     star_icon() {
       return this.starred.indexOf(this.word) === -1 ? 'star-outline' : 'star'
+    },
+    help_icon() {
+      return this.show.help ? 'help-circle' : 'help-circle-outline'
     },
     filter_icon() {
       return this.filters.length || this.selected_tags.length ? 'filter' : 'filter-outline'
