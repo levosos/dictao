@@ -1,0 +1,9 @@
+[
+    { "p": "a segunda-feira", "e": "Monday" },
+    { "p": "a terça-feira", "e": "Tuesday" },
+    { "p": "a quarta-feira", "e": "Wednesday" },
+    { "p": "a quinta-feira", "e": "Thursday" },
+    { "p": "a sexta-feira", "e": "Friday" },
+    { "p": "o sábado", "e": "Saturday" },
+    { "p": "o domingo", "e": "Sunday" }
+]
