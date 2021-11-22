@@ -1,0 +1,14 @@
+[
+    { "p": "janeiro", "e": "January" },
+    { "p": "fevereiro", "e": "February" },
+    { "p": "março", "e": "March" },
+    { "p": "abril", "e": "April" },
+    { "p": "maio", "e": "May" },
+    { "p": "junho", "e": "June" },
+    { "p": "julho", "e": "July" },
+    { "p": "agosto", "e": "August" },
+    { "p": "setembro", "e": "September" },
+    { "p": "outubro", "e": "October" },
+    { "p": "novembro", "e": "November" },
+    { "p": "dezembro", "e": "December" }
+]
