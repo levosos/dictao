@@ -1,4 +1,5 @@
 [
+    { "e": "above", "p": "acima" },
     { "e": "away, far", "p": "longe" },
     { "e": "beautiful", "p": { "m": "bonito", "f": "bonita" }, "pronunciation": "boo-nee-too" },
     { "e": "big", "p": "grande", "pronunciation": "gran-deh" },
@@ -18,6 +19,7 @@
     { "e": "fast", "p": { "m": "rápido", "f": "rápida" } },
     { "e": "first", "p": { "m": "primeiro", "f": "primeira" }, "pronunciation": "pree-mahee-roh" },
     { "e": "following", "p": "seguinte" },
+    { "e": "fresh", "p": { "m": "fresco", "f": "fresca" } },
     { "e": "good", "p": { "m": "bom", "f": "boa", "ms": "bons", "fs": "boas" }, "pronunciation": "bong" },
     { "e": "graduated", "p": "formado" },
     { "e": "honest", "p": { "m": "honesto", "f": "honesta" } },
@@ -54,6 +56,6 @@
     { "e": "ugly", "p": { "m": "feio", "f": "feia" }, "pronunciation": "fay-eeoo" },
     { "e": "weak", "p": { "m": "fraco", "f": "fraca" } },
     { "e": "wild", "p": "selvajem" },
-    { "e": "yello", "p": { "m": "amarelo", "f": "amarela" } },
+    { "e": "yellow", "p": { "m": "amarelo", "f": "amarela" } },
     { "e": "young", "p": "jovem" }
 ]
